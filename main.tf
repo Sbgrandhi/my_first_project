@@ -45,9 +45,7 @@ resource "aws_route_table_association" "my_public_route_table_association" {
   subnet_id      = aws_subnet.my_public_subnet.id
   route_table_id = aws_route_table.my_public_route_table.id
 }
-tags = {
-  Name = "MyPublicRouteTable"
-}
+
 # create a security group for the public subnet
 resource "aws_security_group" "my_public_sg" {
   vpc_id = aws_vpc.my_vpc.id
