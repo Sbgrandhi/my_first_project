@@ -67,21 +67,12 @@ resource "aws_security_group" "ec2_sg" {
 
 # 6. Launch Template
 resource "aws_launch_template" "app_lt" {
-<<<<<<< HEAD
-    name_prefix   = "app_lt_"
-    image_id      = var.ami_id
-    instance_type = var.instance_type
-    key_name      = "my-key" # Replace with your key pair name
-    user_data     = file("user_data.sh")
-    vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-=======
   name_prefix   = "app_lt_"
   image_id      = var.ami_id
   instance_type = var.instance_type
   key_name      = var.key_name
   user_data     = filebase64("user_data.sh")
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
->>>>>>> 67b96f7 (Added Terraform VPC + ALB + ASG deployment)
 }
 
 # 7. Load Balancer
@@ -128,13 +119,6 @@ resource "aws_autoscaling_group" "app_asg" {
     version = "$Latest"
   }
 
-<<<<<<< HEAD
-    tag {
-        key                 = "Name"
-        value               = "app_instance"
-        propagate_at_launch = true
-    }
-=======
   vpc_zone_identifier       = [aws_subnet.public_subnet.id]
   target_group_arns         = [aws_lb_target_group.app_tg.arn]
   health_check_type         = "ELB"
@@ -150,5 +134,4 @@ resource "aws_autoscaling_group" "app_asg" {
   }
 
   depends_on = [aws_lb_listener.app_listener]
->>>>>>> 67b96f7 (Added Terraform VPC + ALB + ASG deployment)
 }
