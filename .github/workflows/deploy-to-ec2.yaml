@@ -1,4 +1,4 @@
-name = Deploy Flash to EC2 Scaling Group
+name: Deploy Flask to EC2 Scaling Group
 on:
   push:
     branches:
