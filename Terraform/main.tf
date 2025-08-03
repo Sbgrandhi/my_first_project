@@ -68,8 +68,8 @@ resource "aws_security_group" "ec2_sg" {
 
 resource "aws_launch_template" "app_lt" {
     name_prefix   = "app_lt_"
-    image_id      = "ami-08a6efd148b1f7504"
-    instance_type = "t3.micro"
+    image_id      = var.ami_id
+    instance_type = var.instance_type
     key_name      = "my-key" # Replace with your key pair name
     user_data     = file("user_data.sh")
     vpc_security_group_ids = [aws_security_group.ec2_sg.id]
